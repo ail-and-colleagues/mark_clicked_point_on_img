@@ -85,7 +85,8 @@ class Img_Mgr:
         dst = '{}_{:04d}{}{}'.format(self.basename, self.count, suffix, self.ext)
         dst = os.path.join(self.dirname, dst)
         print('save: {}'.format(dst))
-        cv2.imwrite(dst, self.img)
+        t = cv2.cvtColor(self.img, cv2.COLOR_RGB2BGR)
+        cv2.imwrite(dst, t)
 
 
 if __name__ == '__main__':

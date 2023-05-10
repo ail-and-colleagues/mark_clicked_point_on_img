@@ -8,7 +8,9 @@ from matplotlib import pyplot as plt
 parser = argparse.ArgumentParser(description='mark clicked points on an image')
 parser.add_argument('img_file_path', help="img_file_path", type=str)
 parser.add_argument('-c', '--count', help="offset of the count", type=int, default=0)
-parser.add_argument('-a', '--auto_save_interval', help="oauto_save_interval", type=int, default=10)
+parser.add_argument('-a', '--auto_save_interval', help="auto_save_interval", type=int, default=10)
+parser.add_argument('-s', '--image_scale', help="scale for image", type=float, default=0.5)
+
 
 
 class Img_Mgr:
@@ -91,11 +93,14 @@ if __name__ == '__main__':
     img_file_path = args.img_file_path
     count = args.count
     auto_save_interval = args.auto_save_interval
+    image_scale = args.image_scale
 
 
     print("open {}".format(img_file_path))
 
     img = Image.open(img_file_path)
+    s = (int(image_scale * img.width), int(image_scale * img.height))
+    img = img.resize(s)
     img = np.asarray(img)
 
     fig, ax = plt.subplots(1, 1)
